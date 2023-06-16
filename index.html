@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href="favicon-32x32.png" />
+    <title>Welcome ✨</title>
+    <meta
+      property="og:description"
+      content="Akhmad Prasetya Atmanegara - Landing Page"
+    />
+    <meta property="og:image" content="https://leftprazz.my.id/meta/thumbnail_new.jpg" />
+    <meta property="og:type" content="website" />
+    <style>
+      html,
+      body,
+      * {
+        padding: 0;
+        margin: 0;
+        font-family: monospace;
+        overflow: hidden;
+      }
+      .box-terluar {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        height: 100vh;
+        margin: 0 auto;
+        background-image: url("bg.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+      }
+      @media (max-width: 500px) {
+        .box-terluar {
+          background-size: cover; /* Untuk tampilan smartphone */
+        }
+      }
+      .box-saya {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: brown;
+        padding-bottom: 20px;
+      }
+      .box-saya img {
+        border-radius: 50%;
+        width: 180px;
+        height: 180px;
+        margin-bottom: 10px;
+      }
+      .box-link {
+        display: flex;
+        flex-direction: column;
+        width: 80%;
+        gap: 8px;
+      }
+      .box-link button {
+        background-color: white;
+        border: none;
+        padding: 8px;
+        font-size: 20px;
+        cursor: pointer;
+        transition: 400ms ease-in-out;
+      }
+      .box-link button:hover {
+        background-color: #333333;
+        color: brown;
+      }
+      /* Animasi Loading */
+      #loading {
+        position: fixed;
+        z-index: 999;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        overflow: visible;
+        margin: auto;
+      }
+
+      #loading:before {
+        content: "";
+        display: block;
+        margin: auto;
+        height: 2em;
+        width: 2em;
+        border-radius: 50%;
+        border: 0.25em solid rgba(255, 255, 255, 0.2);
+        border-top-color: brown;
+        animation: load 0.75s infinite linear;
+      }
+      .text {
+        display: inline-block;
+        font-size: 1em;
+        color: brown;
+        font-family: monospace;
+        margin: auto;
+        text-align: center;
+      }
+
+      @keyframes load {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+    <script>
+      // menunggu halaman selesai dimuat
+      window.addEventListener("load", function () {
+        // mengambil elemen animasi loading
+        var loading = document.getElementById("loading");
+        // mengatur animasi loading menjadi tidak tampil
+        loading.style.display = "none";
+        // menghilangkan elemen animasi loading
+        loading.parentElement.removeChild(loading);
+      });
+    </script>
+  </head>
+  <body>
+    <div id="loading">
+      <div class="text">Loading</div>
+    </div>
+    <div class="box-terluar">
+      <div class="box-saya">
+        <img src="saya.png" />
+        <h1>AKHMAD PRASETYA ATMANEGARA</h1>
+        <p>DevOps, Web Developer, IT Support</p>
+      </div>
+      <div class="box-link">
+        <button onclick="gas('https://instagram.com/leftprazz')">
+          Instagram
+        </button>
+        <button onclick="gas('https://portfolio.leftprazz.my.id')">
+          Web Portfolio
+        </button>
+        <button onclick="gas('https://games.leftprazz.my.id')">
+          Boring? Try my simple game (Created with Native JavaScript, HTML, CSS)
+        </button>
+        <button onclick="gas('https://github.com/leftprazz')">Github</button>
+        <button onclick="gas('https://www.linkedin.com/in/akhmadprasetya27/')">
+          Linkedin
+        </button>
+        <button onclick="gas('https://songwhip.com/lastvoice')">
+          Stream Last Voice on Spotify, iTunes, etc
+        </button>
+      </div>
+    </div>
+    <script>
+      function gas(kemana) {
+        window.open(kemana);
+      }
+    </script>
+  </body>
+</html>
