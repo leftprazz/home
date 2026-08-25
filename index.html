@@ -2,125 +2,299 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="favicon-32x32.png" />
-    <title>Welcome ✨</title>
+    <title>Akhmad Prasetya Atmanegara</title>
+    <meta
+      name="description"
+      content="Akhmad Prasetya Atmanegara - AWS Certified DevOps Engineer. Links, portfolio, and projects."
+    />
+    <meta property="og:title" content="Akhmad Prasetya Atmanegara" />
     <meta
       property="og:description"
-      content="Akhmad Prasetya Atmanegara - Landing Page"
+      content="AWS Certified | DevOps Engineer — links, portfolio, and projects."
     />
     <meta property="og:image" content="https://akhmadprasetya.com/meta/thumbnail_new.jpg" />
     <meta property="og:type" content="website" />
     <style>
-      html,
-      body,
+      :root {
+        --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+        --ink: #f5efe8;
+        --ink-muted: rgba(245, 239, 232, 0.72);
+        --surface: rgba(255, 255, 255, 0.92);
+        --surface-hover: #ffffff;
+        --accent: #7c3a21;
+        --ring: rgba(255, 255, 255, 0.85);
+      }
+
       * {
         padding: 0;
         margin: 0;
-        font-family: monospace;
-        overflow: hidden;
+        box-sizing: border-box;
       }
-      .box-terluar {
+
+      html {
+        -webkit-text-size-adjust: 100%;
+      }
+
+      body {
+        font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
+          "Liberation Mono", monospace;
+        min-height: 100svh;
         display: flex;
         flex-direction: column;
-        justify-content: center;
         align-items: center;
+        justify-content: center;
         text-align: center;
-        height: 100vh;
-        margin: 0 auto;
+        color: var(--ink);
+        position: relative;
+        isolation: isolate;
+        overflow-x: hidden;
+        padding: 48px 20px;
+        background-color: #241512;
+      }
+
+      .backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
         background-image: url("bg.jpg");
         background-size: cover;
         background-position: center;
         background-repeat: no-repeat;
-        background-attachment: fixed;
+        animation: bgIn 900ms var(--ease-out) both;
       }
-      @media (max-width: 500px) {
-        .box-terluar {
-          background-size: cover; /* Untuk tampilan smartphone */
+
+      .scrim {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        background: linear-gradient(
+          180deg,
+          rgba(20, 10, 8, 0.55),
+          rgba(20, 10, 8, 0.35) 40%,
+          rgba(20, 10, 8, 0.65)
+        );
+      }
+
+      .profile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        max-width: 480px;
+        animation: riseIn 500ms var(--ease-out) both;
+      }
+
+      .avatar {
+        width: 132px;
+        height: 132px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--ring);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+        margin-bottom: 18px;
+        transition: transform 200ms var(--ease-out);
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        .avatar:hover {
+          transform: scale(1.04);
         }
       }
-      .box-saya {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+
+      h1 {
+        font-size: clamp(1.15rem, 4vw, 1.55rem);
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        line-height: 1.35;
+      }
+
+      .role {
+        display: inline-flex;
         align-items: center;
-        color: brown;
-        padding-bottom: 20px;
+        gap: 8px;
+        margin-top: 10px;
+        font-size: 0.82rem;
+        letter-spacing: 0.06em;
+        color: var(--ink-muted);
       }
-      .box-saya img {
-        border-radius: 50%;
-        width: 180px;
-        height: 180px;
-        margin-bottom: 10px;
+
+      .role::before,
+      .role::after {
+        content: "";
+        height: 1px;
+        width: 22px;
+        background: currentColor;
+        opacity: 0.5;
       }
-      .box-link {
+
+      .links {
         display: flex;
         flex-direction: column;
-        width: 80%;
-        gap: 8px;
+        width: 100%;
+        max-width: 400px;
+        gap: 10px;
+        margin-top: 34px;
       }
-      .box-link button {
-        background-color: white;
-        border: none;
-        padding: 8px;
-        font-size: 20px;
-        cursor: pointer;
-        transition: 400ms ease-in-out;
+
+      .links a {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+        background-color: var(--surface);
+        color: var(--accent);
+        text-decoration: none;
+        font-size: 0.92rem;
+        font-weight: 600;
+        line-height: 1.4;
+        padding: 13px 18px;
+        border-radius: 12px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+        transition:
+          transform 160ms var(--ease-out),
+          background-color 160ms var(--ease-out),
+          box-shadow 160ms var(--ease-out);
+        opacity: 0;
+        animation: riseIn 450ms var(--ease-out) forwards;
       }
-      .box-link button:hover {
-        background-color: #333333;
-        color: brown;
+
+      .links a span {
+        flex: 1;
       }
-      /* Animasi Loading */
+
+      .links a .arrow {
+        flex: none;
+        opacity: 0;
+        transform: translateX(-4px);
+        transition:
+          opacity 160ms var(--ease-out),
+          transform 160ms var(--ease-out);
+      }
+
+      @media (hover: hover) and (pointer: fine) {
+        .links a:hover {
+          background-color: var(--surface-hover);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+        }
+        .links a:hover .arrow {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      .links a:active {
+        transform: scale(0.97);
+      }
+
+      .links a:focus-visible {
+        outline: 2px solid var(--ring);
+        outline-offset: 3px;
+      }
+
+      .links a:nth-child(1) { animation-delay: 120ms; }
+      .links a:nth-child(2) { animation-delay: 180ms; }
+      .links a:nth-child(3) { animation-delay: 240ms; }
+      .links a:nth-child(4) { animation-delay: 300ms; }
+      .links a:nth-child(5) { animation-delay: 360ms; }
+      .links a:nth-child(6) { animation-delay: 420ms; }
+
+      footer {
+        margin-top: 36px;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        color: var(--ink-muted);
+        animation: fadeIn 600ms 550ms var(--ease-out) both;
+      }
+
+      @keyframes riseIn {
+        from {
+          opacity: 0;
+          transform: translateY(10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+      }
+
+      @keyframes bgIn {
+        from {
+          opacity: 0;
+          transform: scale(1.03);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+
       #loading {
         position: fixed;
         z-index: 999;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        overflow: visible;
-        margin: auto;
+        display: grid;
+        place-items: center;
+        gap: 12px;
+        color: var(--ink);
       }
 
-      #loading:before {
+      #loading::before {
         content: "";
-        display: block;
-        margin: auto;
         height: 2em;
         width: 2em;
         border-radius: 50%;
-        border: 0.25em solid rgba(255, 255, 255, 0.2);
-        border-top-color: brown;
+        border: 0.25em solid rgba(255, 255, 255, 0.25);
+        border-top-color: var(--ink);
         animation: load 0.75s infinite linear;
-      }
-      .text {
-        display: inline-block;
-        font-size: 1em;
-        color: brown;
-        font-family: monospace;
-        margin: auto;
-        text-align: center;
       }
 
       @keyframes load {
-        0% {
-          transform: rotate(0deg);
+        to { transform: rotate(360deg); }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .backdrop,
+        .profile,
+        .links a,
+        footer {
+          animation-duration: 200ms;
+          animation-delay: 0ms;
         }
-        100% {
-          transform: rotate(360deg);
+        @keyframes riseIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        @keyframes bgIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        .avatar,
+        .links a,
+        .links a .arrow {
+          transition-duration: 100ms;
         }
       }
     </style>
     <script>
-      // menunggu halaman selesai dimuat
       window.addEventListener("load", function () {
-        // mengambil elemen animasi loading
-        var loading = document.getElementById("loading");
-        // mengatur animasi loading menjadi tidak tampil
-        loading.style.display = "none";
-        // menghilangkan elemen animasi loading
-        loading.parentElement.removeChild(loading);
+        var loader = document.getElementById("loading");
+        if (loader) {
+          loader.style.opacity = "0";
+          loader.style.transition = "opacity 150ms ease-out";
+          setTimeout(function () {
+            loader.remove();
+          }, 150);
+        }
       });
     </script>
   </head>
@@ -128,35 +302,40 @@
     <div id="loading">
       <div class="text">Loading</div>
     </div>
-    <div class="box-terluar">
-      <div class="box-saya">
-        <img src="saya.png" />
-        <h1>AKHMAD PRASETYA ATMANEGARA</h1>
-        <p>AWS Certified | DevOps Engineer</p>
-      </div>
-      <div class="box-link">
-        <button onclick="gas('https://instagram.com/leftprazz')">
-          Instagram
-        </button>
-        <button onclick="gas('https://portfolio.akhmadprasetya.com')">
-          Web Portfolio
-        </button>
-        <button onclick="gas('https://games.akhmadprasetya.com')">
-          Boring? Try my simple game (Created with Native JavaScript, HTML, CSS)
-        </button>
-        <button onclick="gas('https://github.com/leftprazz')">Github</button>
-        <button onclick="gas('https://www.linkedin.com/in/akhmadprasetya27/')">
-          Linkedin
-        </button>
-        <button onclick="gas('https://songwhip.com/lastvoice')">
-          Stream Last Voice on Spotify, iTunes, etc
-        </button>
-      </div>
-    </div>
+    <div class="backdrop" aria-hidden="true"></div>
+    <div class="scrim" aria-hidden="true"></div>
+
+    <main class="profile">
+      <img class="avatar" src="saya.png" alt="Portrait of Akhmad Prasetya Atmanegara" />
+      <h1>AKHMAD PRASETYA ATMANEGARA</h1>
+      <p class="role">AWS Certified · DevOps Engineer</p>
+    </main>
+
+    <nav class="links" aria-label="Social and project links">
+      <a href="https://instagram.com/leftprazz" target="_blank" rel="noopener noreferrer">
+        <span>Instagram</span><span class="arrow" aria-hidden="true">↗</span>
+      </a>
+      <a href="https://portfolio.akhmadprasetya.com" target="_blank" rel="noopener noreferrer">
+        <span>Web Portfolio</span><span class="arrow" aria-hidden="true">↗</span>
+      </a>
+      <a href="https://games.akhmadprasetya.com" target="_blank" rel="noopener noreferrer">
+        <span>Boring? Try my simple game — native JS, HTML, CSS</span><span class="arrow" aria-hidden="true">↗</span>
+      </a>
+      <a href="https://github.com/leftprazz" target="_blank" rel="noopener noreferrer">
+        <span>GitHub</span><span class="arrow" aria-hidden="true">↗</span>
+      </a>
+      <a href="https://www.linkedin.com/in/akhmadprasetya27/" target="_blank" rel="noopener noreferrer">
+        <span>LinkedIn</span><span class="arrow" aria-hidden="true">↗</span>
+      </a>
+      <a href="https://songwhip.com/lastvoice" target="_blank" rel="noopener noreferrer">
+        <span>Stream Last Voice — Spotify, iTunes, etc</span><span class="arrow" aria-hidden="true">↗</span>
+      </a>
+    </nav>
+
+    <footer>© <span id="year">2026</span> Akhmad Prasetya Atmanegara</footer>
+
     <script>
-      function gas(kemana) {
-        window.open(kemana);
-      }
+      document.getElementById("year").textContent = new Date().getFullYear();
     </script>
   </body>
 </html>
