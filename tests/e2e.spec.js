@@ -3,10 +3,6 @@ const { test, expect } = require("@playwright/test");
 const EXPECTED_LINKS = [
   ["Instagram", "https://instagram.com/leftprazz"],
   ["Web Portfolio", "https://portfolio.akhmadprasetya.com"],
-  [
-    "Boring? Try my simple game — native JS, HTML, CSS",
-    "https://games.akhmadprasetya.com",
-  ],
   ["GitHub", "https://github.com/leftprazz"],
   ["LinkedIn", "https://www.linkedin.com/in/akhmadprasetya27/"],
   [
@@ -15,17 +11,28 @@ const EXPECTED_LINKS = [
   ],
 ];
 
+const REMOVED_LINKS = [["simple game", "https://games.akhmadprasetya.com"]];
+
 test.beforeEach(async ({ page }) => {
   await page.goto("/");
 });
 
 test("renders profile with name and role", async ({ page }) => {
   await expect(page).toHaveTitle("Akhmad Prasetya Atmanegara");
-  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
     "Akhmad Prasetya Atmanegara"
   );
-  await expect(page.locator(".eyebrow")).toContainText("AWS Certified");
+  await expect(page.locator(".eyebrow")).toHaveText(
+    "AWS Certified · DevOps Engineer · Cloud AI & Automation · Vibe Coder"
+  );
   await expect(page.locator(".avatar")).toBeVisible();
+});
+
+test("removed game link stays removed", async ({ page }) => {
+  for (const [label, href] of REMOVED_LINKS) {
+    await expect(page.locator(".links a", { hasText: label })).toHaveCount(0);
+    await expect(page.locator(`.links a[href="${href}"]`)).toHaveCount(0);
+  }
 });
 
 test("loading spinner is removed after page load", async ({ page }) => {
