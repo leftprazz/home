@@ -19,11 +19,14 @@ test.beforeEach(async ({ page }) => {
 
 test("renders profile with name and role", async ({ page }) => {
   await expect(page).toHaveTitle("Akhmad Prasetya Atmanegara");
-  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
     "Akhmad Prasetya Atmanegara"
   );
   await expect(page.locator(".eyebrow")).toHaveText(
-    "AWS Certified · DevOps Engineer · Cloud AI & Automation · Vibe Coder"
+    "AWS Certified · DevOps Engineer"
+  );
+  await expect(page.locator(".role")).toHaveText(
+    "Cloud AI & Automation · Vibe Coder"
   );
   await expect(page.locator(".avatar")).toBeVisible();
 });
