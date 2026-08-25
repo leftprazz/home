@@ -16,15 +16,39 @@
     />
     <meta property="og:image" content="https://akhmadprasetya.com/meta/thumbnail_new.jpg" />
     <meta property="og:type" content="website" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;600;700&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <style>
       :root {
+        --primary: #b9c5ff;
+        --on-primary: #101b4d;
+        --primary-container: #29366d;
+        --on-primary-container: #e0e5ff;
+        --secondary: #c5c5d0;
+        --surface: #111318;
+        --surface-container: #1d1e24;
+        --surface-variant: #45464f;
+        --on-surface: #e4e1e9;
+        --on-surface-variant: #c5c5d0;
+        --outline: #8f9099;
+        --space-2: 0.75rem;
+        --space-3: 1rem;
+        --space-4: 1.5rem;
+        --space-5: 2rem;
+        --space-6: 3rem;
+        --radius-sm: 0.75rem;
+        --radius-md: 1rem;
+        --radius-lg: 1.75rem;
+        --shadow-1: 0 2px 8px #0005;
+        --shadow-2: 0 12px 32px #0006;
         --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
-        --ink: #f5efe8;
-        --ink-muted: rgba(245, 239, 232, 0.72);
-        --surface: rgba(255, 255, 255, 0.92);
-        --surface-hover: #ffffff;
-        --accent: #7c3a21;
-        --ring: rgba(255, 255, 255, 0.85);
+        --duration-fast: 160ms;
+        --duration-normal: 250ms;
+        --duration-slow: 400ms;
       }
 
       * {
@@ -38,43 +62,24 @@
       }
 
       body {
-        font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas,
-          "Liberation Mono", monospace;
+        margin: 0;
+        min-width: 320px;
         min-height: 100svh;
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         text-align: center;
-        color: var(--ink);
-        position: relative;
-        isolation: isolate;
+        color: var(--on-surface);
+        font: 400 1rem/1.6 "DM Sans", sans-serif;
         overflow-x: hidden;
-        padding: 48px 20px;
-        background-color: #241512;
-      }
-
-      .backdrop {
-        position: fixed;
-        inset: 0;
-        z-index: -2;
-        background-image: url("bg.jpg");
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        animation: bgIn 900ms var(--ease-out) both;
-      }
-
-      .scrim {
-        position: fixed;
-        inset: 0;
-        z-index: -1;
-        background: linear-gradient(
-          180deg,
-          rgba(20, 10, 8, 0.55),
-          rgba(20, 10, 8, 0.35) 40%,
-          rgba(20, 10, 8, 0.65)
-        );
+        padding: var(--space-6, 3rem) var(--space-3);
+        background: radial-gradient(
+            circle at 95% 15%,
+            #29366d55,
+            transparent 35%
+          ),
+          var(--surface);
       }
 
       .profile {
@@ -83,41 +88,50 @@
         align-items: center;
         gap: 4px;
         max-width: 480px;
-        animation: riseIn 500ms var(--ease-out) both;
+        animation: riseIn var(--duration-slow) var(--ease-out) both;
       }
 
       .avatar {
-        width: 132px;
-        height: 132px;
-        border-radius: 50%;
+        width: 9rem;
+        aspect-ratio: 1;
         object-fit: cover;
-        border: 3px solid var(--ring);
-        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
-        margin-bottom: 18px;
-        transition: transform 200ms var(--ease-out);
+        border-radius: var(--radius-lg);
+        border: 2px solid var(--primary);
+        box-shadow: var(--shadow-2);
+        margin-bottom: var(--space-4);
+        transition: transform var(--duration-fast) var(--ease-out);
       }
 
       @media (hover: hover) and (pointer: fine) {
         .avatar:hover {
-          transform: scale(1.04);
+          transform: translateY(-2px);
         }
       }
 
-      h1 {
-        font-size: clamp(1.15rem, 4vw, 1.55rem);
+      .eyebrow {
+        color: var(--primary);
+        font-size: 0.75rem;
         font-weight: 700;
-        letter-spacing: 0.14em;
-        line-height: 1.35;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: clamp(1.6rem, 5vw, 2.35rem);
+        font-weight: 700;
+        letter-spacing: -0.03em;
+        line-height: 1.15;
+        margin-top: 0.4rem;
       }
 
       .role {
         display: inline-flex;
         align-items: center;
-        gap: 8px;
-        margin-top: 10px;
-        font-size: 0.82rem;
-        letter-spacing: 0.06em;
-        color: var(--ink-muted);
+        gap: 10px;
+        margin-top: var(--space-2);
+        font-size: 0.9rem;
+        color: var(--on-surface-variant);
       }
 
       .role::before,
@@ -134,50 +148,41 @@
         flex-direction: column;
         width: 100%;
         max-width: 400px;
-        gap: 10px;
-        margin-top: 34px;
+        gap: var(--space-2);
+        margin-top: var(--space-5);
       }
 
       .links a {
+        min-height: 3rem;
         display: flex;
         align-items: center;
         justify-content: space-between;
         gap: 12px;
-        background-color: var(--surface);
-        color: var(--accent);
+        padding: 0.75rem 1.25rem;
+        background: var(--surface-container);
+        color: var(--on-surface);
         text-decoration: none;
+        border: 1px solid #8f909955;
+        border-radius: 2rem;
         font-size: 0.92rem;
         font-weight: 600;
         line-height: 1.4;
-        padding: 13px 18px;
-        border-radius: 12px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
         transition:
-          transform 160ms var(--ease-out),
-          background-color 160ms var(--ease-out),
-          box-shadow 160ms var(--ease-out);
+          background-color var(--duration-normal) var(--ease-out),
+          border-color var(--duration-normal) var(--ease-out),
+          box-shadow var(--duration-normal) var(--ease-out),
+          transform var(--duration-fast) var(--ease-out);
         opacity: 0;
-        animation: riseIn 450ms var(--ease-out) forwards;
-      }
-
-      .links a span {
-        flex: 1;
-      }
-
-      .links a .arrow {
-        flex: none;
-        opacity: 0;
-        transform: translateX(-4px);
-        transition:
-          opacity 160ms var(--ease-out),
-          transform 160ms var(--ease-out);
+        animation: riseIn var(--duration-slow) var(--ease-out) forwards;
       }
 
       @media (hover: hover) and (pointer: fine) {
         .links a:hover {
-          background-color: var(--surface-hover);
-          transform: translateY(-2px);
-          box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+          background: var(--primary-container);
+          border-color: var(--primary);
+          color: var(--on-primary-container);
+          transform: translateY(-1px);
+          box-shadow: var(--shadow-1);
         }
         .links a:hover .arrow {
           opacity: 1;
@@ -189,9 +194,23 @@
         transform: scale(0.97);
       }
 
-      .links a:focus-visible {
-        outline: 2px solid var(--ring);
+      .links a:focus-visible,
+      .links a:focus {
+        outline: 3px solid var(--primary);
         outline-offset: 3px;
+      }
+
+      .links a span:first-child {
+        flex: 1;
+      }
+
+      .links a .arrow {
+        flex: none;
+        opacity: 0;
+        transform: translateX(-4px);
+        transition:
+          opacity var(--duration-fast) var(--ease-out),
+          transform var(--duration-fast) var(--ease-out);
       }
 
       .links a:nth-child(1) { animation-delay: 120ms; }
@@ -202,17 +221,17 @@
       .links a:nth-child(6) { animation-delay: 420ms; }
 
       footer {
-        margin-top: 36px;
-        font-size: 0.72rem;
-        letter-spacing: 0.08em;
-        color: var(--ink-muted);
-        animation: fadeIn 600ms 550ms var(--ease-out) both;
+        margin-top: var(--space-5);
+        font-size: 0.75rem;
+        letter-spacing: 0.06em;
+        color: var(--on-surface-variant);
+        animation: fadeIn var(--duration-slow) 550ms var(--ease-out) both;
       }
 
       @keyframes riseIn {
         from {
           opacity: 0;
-          transform: translateY(10px);
+          transform: translateY(0.65rem);
         }
         to {
           opacity: 1;
@@ -225,17 +244,6 @@
         to { opacity: 1; }
       }
 
-      @keyframes bgIn {
-        from {
-          opacity: 0;
-          transform: scale(1.03);
-        }
-        to {
-          opacity: 1;
-          transform: scale(1);
-        }
-      }
-
       #loading {
         position: fixed;
         z-index: 999;
@@ -245,7 +253,7 @@
         display: grid;
         place-items: center;
         gap: 12px;
-        color: var(--ink);
+        color: var(--on-surface);
       }
 
       #loading::before {
@@ -253,8 +261,8 @@
         height: 2em;
         width: 2em;
         border-radius: 50%;
-        border: 0.25em solid rgba(255, 255, 255, 0.25);
-        border-top-color: var(--ink);
+        border: 0.25em solid var(--surface-variant);
+        border-top-color: var(--primary);
         animation: load 0.75s infinite linear;
       }
 
@@ -263,7 +271,6 @@
       }
 
       @media (prefers-reduced-motion: reduce) {
-        .backdrop,
         .profile,
         .links a,
         footer {
@@ -271,10 +278,6 @@
           animation-delay: 0ms;
         }
         @keyframes riseIn {
-          from { opacity: 0; }
-          to { opacity: 1; }
-        }
-        @keyframes bgIn {
           from { opacity: 0; }
           to { opacity: 1; }
         }
@@ -302,13 +305,12 @@
     <div id="loading">
       <div class="text">Loading</div>
     </div>
-    <div class="backdrop" aria-hidden="true"></div>
-    <div class="scrim" aria-hidden="true"></div>
 
     <main class="profile">
       <img class="avatar" src="saya.png" alt="Portrait of Akhmad Prasetya Atmanegara" />
-      <h1>AKHMAD PRASETYA ATMANEGARA</h1>
-      <p class="role">AWS Certified · DevOps Engineer</p>
+      <p class="eyebrow">AWS Certified · DevOps Engineer</p>
+      <h1>Akhmad Prasetya Atmanegara</h1>
+      <p class="role">Welcome to my corner of the internet</p>
     </main>
 
     <nav class="links" aria-label="Social and project links">

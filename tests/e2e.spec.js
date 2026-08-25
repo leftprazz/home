@@ -22,9 +22,9 @@ test.beforeEach(async ({ page }) => {
 test("renders profile with name and role", async ({ page }) => {
   await expect(page).toHaveTitle("Akhmad Prasetya Atmanegara");
   await expect(page.getByRole("heading", { level: 1 })).toHaveText(
-    "AKHMAD PRASETYA ATMANEGARA"
+    "Akhmad Prasetya Atmanegara"
   );
-  await expect(page.locator(".role")).toContainText("AWS Certified");
+  await expect(page.locator(".eyebrow")).toContainText("AWS Certified");
   await expect(page.locator(".avatar")).toBeVisible();
 });
 
